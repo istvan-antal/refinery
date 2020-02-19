@@ -75,9 +75,14 @@
         "@types/react-dom": "^16.9.5",
         "@types/react-redux": "^7.1.7",
         "charge-sdk": "1.0.7",
+        "csv-parse": "^4.8.5",
+        "highcharts": "^8.0.0",
+        "highcharts-react-official": "^3.0.0",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "react-redux": "^7.2.0",
-        "redux": "^4.0.5"
+        "redux": "^4.0.5",
+        "semantic-ui-css": "^2.4.1",
+        "semantic-ui-react": "^0.88.2"
     }
 }
