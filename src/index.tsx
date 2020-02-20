@@ -1,17 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider, connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
+import { Provider } from 'react-redux';
 import App from './main/components/App';
-import store, { State } from './main/store';
-
-const ConnectedApp = connect((state: State) => ({
-}), (dispatch: Dispatch) => bindActionCreators({
-}, dispatch))(App);
+import store from './main/store';
 
 render(
     <Provider store={store}>
-        <ConnectedApp />
+        <App />
     </Provider>,
     document.getElementById('app'),
 );

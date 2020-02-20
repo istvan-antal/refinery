@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-// import { counter } from './counter';
+import { mapping } from './mapping';
 
 export default combineReducers({
-    // counter,
+    mapping,
 });

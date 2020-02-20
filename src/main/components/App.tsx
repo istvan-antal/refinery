@@ -7,9 +7,16 @@ import DropZone from '../../ui/components/DropZone';
 import Layout from '../../ui/components/Layout';
 
 import 'semantic-ui-css/semantic.min.css';
+import useShallowEqualSelector from '../../util/useShallowEqualSelector';
+import useActions from '../../util/useActions';
+import { mappingActions } from '../store/actions/mapping';
+import exec from '../../util/exec';
+import ErrorBoundary from '../../ui/components/ErrorBoundary';
 
 const App = () => {
     const [data, setData] = useState<string[][]>([]);
+    const mapping = useShallowEqualSelector(state => state.mapping);
+    const { updateMapppingCode } = useActions(mappingActions);
 
     const onDropFiles = (files: FileList) => {
         (async () => {
@@ -29,21 +36,26 @@ const App = () => {
         );
     }
 
-    const header = data[0];
+    const execResult = mapping.mappingCode ? exec({ data }, mapping.mappingCode) : undefined;
 
+    const header = data[0];
     const options: Options = {
         title: {
             text: 'Chart',
         },
-        series: header.map((name, columnIndex) => ({
+        series: execResult || (header.map((name, columnIndex) => ({
             name,
             type: 'line',
             data: data.slice(1).map(row => +row[columnIndex]),
-        })),
+        }))),
+        chart: {
+            width: null,
+            height: null,
+        },
     };
 
     return (
-        <DropZone className="Layout" onDropFiles={onDropFiles}>
+        <DropZone onDropFiles={onDropFiles}>
             <Layout>
                 <table>
                     <thead>
@@ -63,10 +75,21 @@ const App = () => {
                         ))}
                     </tbody>
                 </table>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={options}
+                <ErrorBoundary onErrorRender={error => error.toString()}>
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={options}
+                    />
+                </ErrorBoundary>
+                <textarea
+                    value={mapping.mappingCode}
+                    onChange={event => {
+                        updateMapppingCode(event.target.value);
+                    }}
                 />
+                <pre style={{ overflow: 'scroll' }}>
+                    {mapping.mappingCode && JSON.stringify(execResult, null, 4)}
+                </pre>
             </Layout>
         </DropZone>
     );
