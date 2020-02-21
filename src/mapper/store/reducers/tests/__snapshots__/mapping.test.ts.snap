@@ -6,4 +6,10 @@ Object {
 }
 `;
 
+exports[`mapping updateMapppingCode 2`] = `
+Object {
+  "xAxisType": "time",
+}
+`;
+
 exports[`mapping with generic action and default state 1`] = `Object {}`;

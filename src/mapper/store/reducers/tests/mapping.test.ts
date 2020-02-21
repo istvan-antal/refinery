@@ -9,3 +9,7 @@ test('mapping with generic action and default state', () => {
 test('mapping updateMapppingCode', () => {
     expect(mapping({}, mappingActions.updateMapppingCode('data'))).toMatchSnapshot();
 });
+
+test('mapping updateMapppingCode', () => {
+    expect(mapping({}, mappingActions.setXAxisType('time'))).toMatchSnapshot();
+});

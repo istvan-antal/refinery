@@ -2,6 +2,6 @@
 
 exports[`exec with error 1`] = `
 Object {
-  "error": [SyntaxError: Unexpected token '}'],
+  "error": "SyntaxError: Unexpected token '}'",
 }
 `;
