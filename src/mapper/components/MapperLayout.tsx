@@ -6,10 +6,10 @@ interface Props {
     children: ReactNode;
 }
 
-const Layout = ({ children }: Props) => (
-    <div className="Layout">
+const MapperLayout = ({ children }: Props) => (
+    <div className="MapperLayout">
         {children}
     </div>
 );
 
-export default Layout;
+export default MapperLayout;
