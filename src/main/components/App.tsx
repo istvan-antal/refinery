@@ -43,7 +43,9 @@ const App = () => {
         title: {
             text: 'Chart',
         },
-        series: execResult || (header.map((name, columnIndex) => ({
+        series: execResult ? execResult.map((item: { name?: string; data?: []; type?: string }) => ({
+            ...item,
+        })) : (header.map((name, columnIndex) => ({
             name,
             type: 'line',
             data: data.slice(1).map(row => +row[columnIndex]),
@@ -57,24 +59,26 @@ const App = () => {
     return (
         <DropZone onDropFiles={onDropFiles}>
             <Layout>
-                <table>
-                    <thead>
-                        <tr>
-                            {header.map(title => (
-                                <th key={title}>{title}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.slice(1).map((row, y) => (
-                            <tr key={y}>
-                                {row.map((column, x) => (
-                                    <td key={x}>{column}</td>
+                <pre style={{ overflow: 'scroll' }}>
+                    <table>
+                        <thead>
+                            <tr>
+                                {header.map(title => (
+                                    <th key={title}>{title}</th>
                                 ))}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {data.slice(1, 50).map((row, y) => (
+                                <tr key={y}>
+                                    {row.map((column, x) => (
+                                        <td key={x}>{column}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </pre>
                 <ErrorBoundary onErrorRender={error => error.toString()}>
                     <HighchartsReact
                         highcharts={Highcharts}
@@ -88,7 +92,11 @@ const App = () => {
                     }}
                 />
                 <pre style={{ overflow: 'scroll' }}>
-                    {mapping.mappingCode && JSON.stringify(execResult, null, 4)}
+                    <ErrorBoundary onErrorRender={error => error.toString()}>
+                        <>
+                            {mapping.mappingCode && JSON.stringify(execResult.slice ? execResult.slice(50) : execResult, null, 4)}
+                        </>
+                    </ErrorBoundary>
                 </pre>
             </Layout>
         </DropZone>
