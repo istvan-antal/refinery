@@ -4,7 +4,7 @@ import Highcharts, { Options } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import parseCsvFile from '../../util/parseCsvFile';
 import DropZone from '../../ui/components/DropZone';
-import Layout from '../../ui/components/Layout';
+import Layout from './MapperLayout';
 
 import 'semantic-ui-css/semantic.min.css';
 import useShallowEqualSelector from '../../util/useShallowEqualSelector';
@@ -30,7 +30,7 @@ const Mapper = () => {
 
     if (!data.length) {
         return (
-            <DropZone className="Layout" onDropFiles={onDropFiles}>
+            <DropZone onDropFiles={onDropFiles}>
                 Drag and drop a .csv file to start analyzing.
             </DropZone>
         );

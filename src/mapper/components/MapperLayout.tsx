@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import './Layout.scss';
+import './MapperLayout.scss';
 
 interface Props {
     children: ReactNode;
