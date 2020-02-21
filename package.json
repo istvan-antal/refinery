@@ -38,10 +38,14 @@
         ],
         "coveragePathIgnorePatterns": [
             "/src/index.ts",
-            "/src/actions/index.ts",
-            "/src/reducers/index.ts",
-            "/src/store/index.ts",
-            "/src/App.ts"
+            "/src/main/components",
+            "/src/ui/components",
+            "/src/util/fileToBuffer.ts",
+            "/src/util/parseCsvFile.ts",
+            "/src/util/useActions.ts",
+            "/src/util/useShallowEqualSelector.ts",
+            "/src/main/store/index.tsx",
+            "/src/main/store/reducers/index.tsx"
         ],
         "moduleFileExtensions": [
             "ts",

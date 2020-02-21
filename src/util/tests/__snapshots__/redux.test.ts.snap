@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createAction with parameter 1`] = `
+Object {
+  "payload": "test",
+  "type": "test",
+}
+`;
+
+exports[`createAction without parameter 1`] = `
+Object {
+  "type": "test",
+}
+`;

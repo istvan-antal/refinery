@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapping updateMapppingCode 1`] = `
+Object {
+  "mappingCode": "data",
+}
+`;
+
+exports[`mapping with generic action and default state 1`] = `Object {}`;
