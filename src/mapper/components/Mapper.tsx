@@ -47,6 +47,9 @@ const Mapper = () => {
         title: {
             text: 'Chart',
         },
+        xAxis: {
+            type: mapping.xAxisType === 'time' ? 'datetime' : undefined,
+        },
         series: execResult ? mappingResultToSeries(execResult) : (header.map((name, columnIndex) => ({
             name,
             type: 'line',

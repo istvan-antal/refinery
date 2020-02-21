@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Button } from 'semantic-ui-react';
 import useActions from '../../util/useActions';
 import { mappingActions } from '../store/actions/mapping';
+import { XAxisType } from '../store/reducers/mapping';
+import useShallowEqualSelector from '../../util/useShallowEqualSelector';
 
 const MappingCodeEditor = () => {
     const [code, setCode] = useState<string>('');
-    const { updateMapppingCode } = useActions(mappingActions);
+    const { updateMapppingCode, setXAxisType } = useActions(mappingActions);
+    // eslint-disable-next-line no-shadow
+    const xAxisType = useShallowEqualSelector(({ mapping: { xAxisType } }) => xAxisType);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -51,13 +55,28 @@ examples:
     ]),
 ]`}
             />
-            <Button
-                onClick={() => {
-                    updateMapppingCode(code);
-                }}
-            >
-                Run
-            </Button>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <Button
+                    onClick={() => {
+                        updateMapppingCode(code);
+                    }}
+                >
+                    Run
+                </Button>
+                <label>
+                    X Axis type:
+                    <select
+                        value={xAxisType}
+                        onChange={event => {
+                            const { value } = event.target;
+                            setXAxisType(value ? value as XAxisType : undefined);
+                        }}
+                    >
+                        <option>Default</option>
+                        <option value="time">Time</option>
+                    </select>
+                </label>
+            </div>
         </div>
     );
 };
