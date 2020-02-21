@@ -1,0 +1,13 @@
+.DropBox {
+    border: 1px #CCC dashed;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+
+    &.highlight {
+        background-color: #f3f3f3;
+    }
+}

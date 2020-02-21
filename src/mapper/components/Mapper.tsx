@@ -12,6 +12,7 @@ import useActions from '../../util/useActions';
 import { mappingActions } from '../store/actions/mapping';
 import exec from '../../util/exec';
 import ErrorBoundary from '../../ui/components/ErrorBoundary';
+import DropBox from '../../ui/components/DropBox';
 
 const Mapper = () => {
     const [data, setData] = useState<string[][]>([]);
@@ -31,7 +32,7 @@ const Mapper = () => {
     if (!data.length) {
         return (
             <DropZone onDropFiles={onDropFiles}>
-                Drag and drop a .csv file to start analyzing.
+                <DropBox />
             </DropZone>
         );
     }
