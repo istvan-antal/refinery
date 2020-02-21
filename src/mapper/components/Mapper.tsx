@@ -13,7 +13,7 @@ import { mappingActions } from '../store/actions/mapping';
 import exec from '../../util/exec';
 import ErrorBoundary from '../../ui/components/ErrorBoundary';
 
-const App = () => {
+const Mapper = () => {
     const [data, setData] = useState<string[][]>([]);
     const mapping = useShallowEqualSelector(state => state.mapping);
     const { updateMapppingCode } = useActions(mappingActions);
@@ -104,4 +104,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Mapper;
