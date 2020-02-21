@@ -45,7 +45,8 @@
             "/src/util/useActions.ts",
             "/src/util/useShallowEqualSelector.ts",
             "/src/main/store/index.tsx",
-            "/src/main/store/reducers/index.tsx"
+            "/src/main/store/reducers/index.tsx",
+            "/src/mapper/components"
         ],
         "moduleFileExtensions": [
             "ts",

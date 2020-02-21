@@ -94,7 +94,8 @@ const App = () => {
                 <pre style={{ overflow: 'scroll' }}>
                     <ErrorBoundary onErrorRender={error => error.toString()}>
                         <>
-                            {mapping.mappingCode && JSON.stringify(execResult.slice ? execResult.slice(50) : execResult, null, 4)}
+                            {mapping.mappingCode &&
+                                JSON.stringify(execResult.slice ? execResult.slice(50) : execResult, null, 4)}
                         </>
                     </ErrorBoundary>
                 </pre>
