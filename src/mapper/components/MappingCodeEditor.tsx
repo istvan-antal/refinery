@@ -22,17 +22,27 @@ const MappingCodeEditor = () => {
  * body - body of CSV
 
 Available APIs:
+ * column(index) - returns a column of numeric data from the body
  * DateTime (luxon)
 
 
-examples: [
+examples:
+
+[
+    {
+        name: header[1],
+        data: column(1),
+    }
+]
+
+[
     {
         name: header[1],
         data: body.map(row => +row[1]),
     }
 ]
 
-or
+
 
 [
     body.map(row => [

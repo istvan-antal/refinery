@@ -12,6 +12,7 @@ import ErrorBoundary from '../../ui/components/ErrorBoundary';
 import DropBox from '../../ui/components/DropBox';
 import MappingCodeEditor from './MappingCodeEditor';
 import mappingResultToSeries from '../../util/mappingResultToSeries';
+import getColumn from '../../util/getColumn';
 
 const Mapper = () => {
     const [data, setData] = useState<string[][]>([]);
@@ -39,7 +40,7 @@ const Mapper = () => {
     const body = data.slice(1);
 
     const execResult = mapping.mappingCode ? exec({
-        data, header, body, DateTime,
+        data, header, body, DateTime, column: (index: number) => getColumn(body, index),
     }, mapping.mappingCode) : undefined;
 
     const options: Options = {
