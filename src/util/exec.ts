@@ -8,7 +8,7 @@ const exec = (params: { [key: string]: {} }, code: string) => {
             ...Object.values(params),
         );
     } catch (error) {
-        return { error };
+        return { error: error.toString() };
     }
 };
 

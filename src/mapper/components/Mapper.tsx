@@ -2,48 +2,16 @@
 import React, { useState } from 'react';
 import Highcharts, { Options } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { Button } from 'semantic-ui-react';
+import { DateTime } from 'luxon';
 import parseCsvFile from '../../util/parseCsvFile';
 import DropZone from '../../ui/components/DropZone';
 import Layout from './MapperLayout';
-
-import 'semantic-ui-css/semantic.min.css';
 import useShallowEqualSelector from '../../util/useShallowEqualSelector';
-import useActions from '../../util/useActions';
-import { mappingActions } from '../store/actions/mapping';
 import exec from '../../util/exec';
 import ErrorBoundary from '../../ui/components/ErrorBoundary';
 import DropBox from '../../ui/components/DropBox';
-
-const MappingCodeEditor = () => {
-    const [code, setCode] = useState<string>('');
-    const { updateMapppingCode } = useActions(mappingActions);
-
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <textarea
-                style={{ flexGrow: 1 }}
-                value={code}
-                onChange={event => {
-                    setCode(event.target.value);
-                }}
-                placeholder={`[
-    {
-        name: header[1],
-        data: body.map(row => +row[1]),
-    }
-]`}
-            />
-            <Button
-                onClick={() => {
-                    updateMapppingCode(code);
-                }}
-            >
-                Run
-            </Button>
-        </div>
-    );
-};
+import MappingCodeEditor from './MappingCodeEditor';
+import mappingResultToSeries from '../../util/mappingResultToSeries';
 
 const Mapper = () => {
     const [data, setData] = useState<string[][]>([]);
@@ -70,15 +38,15 @@ const Mapper = () => {
     const header = data[0];
     const body = data.slice(1);
 
-    const execResult = mapping.mappingCode ? exec({ data, header, body }, mapping.mappingCode) : undefined;
+    const execResult = mapping.mappingCode ? exec({
+        data, header, body, DateTime,
+    }, mapping.mappingCode) : undefined;
 
     const options: Options = {
         title: {
             text: 'Chart',
         },
-        series: execResult ? execResult.map((item: { name?: string; data?: []; type?: string }) => ({
-            ...item,
-        })) : (header.map((name, columnIndex) => ({
+        series: execResult ? mappingResultToSeries(execResult) : (header.map((name, columnIndex) => ({
             name,
             type: 'line',
             data: data.slice(1).map(row => +row[columnIndex]),
