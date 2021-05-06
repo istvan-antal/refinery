@@ -87,7 +87,7 @@
         "charge-sdk": "1.0.7",
         "classnames": "^2.2.6",
         "csv-parse": "^4.8.5",
-        "highcharts": "^8.0.0",
+        "highcharts": "^9.0.0",
         "highcharts-react-official": "^3.0.0",
         "luxon": "^1.22.0",
         "react": "^16.12.0",
